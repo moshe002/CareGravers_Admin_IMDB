@@ -94,7 +94,7 @@ include("fetch_database.php");
 </head>
 <body class="bg-gray-100 text-gray-900 tracking-wider leading-normal">
     <!--sidebar-->
-    <?php include 'C:\xampp\htdocs\CareGravers_Admin_IMDB\src\components\navbar.php';?>   
+    <?php include 'C:\xampp 8\htdocs\CareGravers_Admin_IMDB\src\components\navbar.php';?>   
 	<!--Container-->
 	<div class="container p-16" id="users"> 
 		<!--Card-->

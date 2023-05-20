@@ -9,7 +9,7 @@
 </head>
 <body>
         <!--sidebar-->
-        <?php include 'C:\xampp\htdocs\CareGravers_Admin_IMDB\src\components\navbar.php';?>
+        <?php include 'C:\xampp 8\htdocs\CareGravers_Admin_IMDB\src\components\navbar.php';?>
         <!-- content -->
         
         <!-- end of content -->
