@@ -18,13 +18,13 @@
                     <img id="users_img" class="ml-0.5" src="../assets//icons//white_users_icon.png" alt="users_icon">
                     Users</button>
                 <button 
-                    id="deceased_info" 
+                    id="deceased_info" onClick="location.href='deceased-info.php'"
                     class="flex gap-3 p-2 text-white font-semibold w-full outline-none focus:bg-white focus:text-black duration-300" 
                     href="">
                     <img id="deceased_info_img" src="../assets//icons//white_deceased_icon.png" alt="deceased_icon">
                     Deceased Information</button>
                 <button 
-                    id="explorer" 
+                    id="explorer"
                     class="flex gap-4 p-2 text-white font-semibold w-full outline-none focus:bg-white focus:text-black duration-300" 
                     href="">
                     <img id="explorer_img" class="ml-0.5" src="../assets//icons//white_explorer_icon.png" alt="explorer_icon">

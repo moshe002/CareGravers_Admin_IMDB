@@ -97,6 +97,7 @@ include("fetch_database.php");
     <?php include 'C:\xampp 8\htdocs\CareGravers_Admin_IMDB\src\components\navbar.php';?>   
 	<!--Container-->
 	<div class="container p-16" id="users"> 
+		<h3><strong>USERS</strong></h3><br><br>
 		<!--Card-->
 		<div id='recipients' class="p-8 mt-6 lg:mt-0 rounded shadow shadow-2xl bg-white">
 			<table id="example" class="stripe hover" style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
