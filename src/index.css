@@ -1,3 +1,11 @@
+/*
+    hello, do not delete this index.css file.
+    Base file ni para sa tailwind.css incase mag gamit ta og
+    @apply nga function(?) sa tailwind
+    
+    -Moses Fat
+*/
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
