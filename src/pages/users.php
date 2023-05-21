@@ -1,9 +1,8 @@
 <?php
-include("fetch_database.php");
+	include("fetch_database.php");
 ?>
 <!DOCTYPE html>
 <html lang="en" class="antialiased">
-
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,12 +11,12 @@ include("fetch_database.php");
 	<meta name="description" content="">
 	<meta name="keywords" content="">
 	<link href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" rel=" stylesheet">
-	<!--Replace with your tailwind.css once created-->
+	<!-- Replace with your tailwind.css once created -->
 
 
-	<!--Regular Datatables CSS-->
+	<!-- Regular Datatables CSS -->
 	<link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
-	<!--Responsive Extension Datatables CSS-->
+	<!-- Responsive Extension Datatables CSS -->
 	<link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css" rel="stylesheet">
 
 	<style>
@@ -64,7 +63,7 @@ include("fetch_database.php");
 		/*Pagination Buttons - Hover */
 		.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
 			color: #fff !important;
-			box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06);/
+			box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06);
 			font-weight: 700;
 			border-radius: .25rem;
 			background: #23A6F0 !important;
@@ -93,13 +92,11 @@ include("fetch_database.php");
 	</style>
 </head>
 <body class="bg-gray-100 text-gray-900 tracking-wider leading-normal">
-    <!--sidebar-->
-    <?php include 'C:\xampp 8\htdocs\CareGravers_Admin_IMDB\src\components\navbar.php';?>   
-	<!--Container-->
+	<!-- Container -->
 	<div class="container p-16" id="users"> 
 		<h3><strong>USERS</strong></h3><br><br>
-		<!--Card-->
-		<div id='recipients' class="p-8 mt-6 lg:mt-0 rounded shadow shadow-2xl bg-white">
+		<!-- Card -->
+		<div id='recipients' class="p-8 mt-6 lg:mt-0 rounded shadow-2xl bg-white">
 			<table id="example" class="stripe hover" style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
             <thead class="border-b border-primary-200 bg-primary-100 text-neutral-800">
                 <th>ID</th>
@@ -113,7 +110,7 @@ include("fetch_database.php");
             <tbody>
                 <?php 
                     if(is_array($fetchData)){      
-                        $sn=1;
+                       $sn=1;
                         foreach($fetchData as $data){
                 ?>
                 <tr>
@@ -137,12 +134,12 @@ include("fetch_database.php");
             </tbody>
 			</table>
 		</div>
-		<!--/Card-->
+		<!-- /Card -->
 	</div>
-	<!--/container-->
-	<!-- jQuery -->
+	<!-- /container -->
+	<!-- jQuer -->
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	<!--Datatables -->
+	<!-- Datatables  -->
 	<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 	<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
 	<script>
@@ -155,7 +152,5 @@ include("fetch_database.php");
 				.responsive.recalc();
 		});
 	</script>
-
 </body>
-
 </html>
