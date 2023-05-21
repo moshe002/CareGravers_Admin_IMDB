@@ -89,8 +89,6 @@ body {font-family: Arial, Helvetica, sans-serif;}
 </style>
 </head>
 <body class="bg-gray-100 text-gray-900 tracking-wider leading-normal">
-<!--sidebar-->
-<?php include 'C:\xampp 8\htdocs\CareGravers_Admin_IMDB\src\components\navbar.php';?>
 <!--Container-->
 <div class="container p-16" id="users">
     <h3><strong>DECEASED INFORMATION</strong></h3><br><br>
@@ -210,9 +208,11 @@ body {font-family: Arial, Helvetica, sans-serif;}
         })
             .columns.adjust()
             .responsive.recalc();
-
-        // Open modal on button click
-        $('.open-modal-btn').click(function () {
+    });
+</script>
+<script>
+    // Open modal on button click
+    $('.open-modal-btn').click(function () {
             // Get the row data
             var row = $(this).closest('tr');
             var deceasedID = row.find('td:eq(0)').text().trim();
@@ -247,7 +247,6 @@ body {font-family: Arial, Helvetica, sans-serif;}
                 $('#myModal').css('display', 'none');
             }
         });
-    });
 </script>
 </body>
 </html>
