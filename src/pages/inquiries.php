@@ -1,5 +1,8 @@
 <?php 
-
+	session_start();
+	if(!isset($_SESSION["login"]))
+		header("location:/CareGraver_ADMIN/src/pages/login.php"); 
+	$loggedInAdmin = $_SESSION["loggedInAdmin"];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -182,7 +185,7 @@
                 <!-- end of top navbar -->
                 <!-- PUT CONTENT HERE -->
                 <div>
-                    <h1>inquiries</h1>
+                    <?php include('C:\xampp\htdocs\CareGraver_ADMIN\src\components\chat.php');	?>
                 </div>
         </div>
     </div>
