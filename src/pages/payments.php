@@ -7,13 +7,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" rel=" stylesheet">
-	<!-- Replace with your tailwind.css once created -->
-	<!-- Regular Datatables CSS -->
-	<link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
-	<!-- Responsive Extension Datatables CSS -->
-	<link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css" rel="stylesheet">
-    <title>Payments</title>
+	<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v6.0.0-beta3/css/all.css" integrity="...your-integrity-value-here..." crossorigin="anonymous" />
+    <link href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!--Replace with your tailwind.css once created-->
+    <!--Regular Datatables CSS-->
+    <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
+    <!--Responsive Extension Datatables CSS-->
+    <link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css" rel="stylesheet">    <title>Payments</title>
+	<link rel="stylesheet" href="../css/deceased-info.css">
+	<title>Payments</title>
 </head>
 <body>
     <!-- main div -->
@@ -181,13 +183,120 @@
                 </div>
                 <!-- end of top navbar -->
                 <!-- PUT CONTENT HERE -->
-                <div>
-                    <h1>payments</h1>
-                </div>
+				<!-- buttons -->
+				<div class="flex justify-end gap-5 px-5 pt-2">
+					<button id="reservation_btn" class="border-b-2 border-b-gray-700 active:border-b-blue-400">Reservation</button>
+					<button id="burial_booking_btn" class="border-b-2 border-b-gray-700 active:border-b-blue-400">Burial Booking</button>
+				</div>
+				<!-- end of buttons -->
+				<!-- content div (reservation) -->
+				<div id="reservation" class="flex flex-col">
+					<!-- boxes stuff -->
+					<div class="flex flex-row justify-evenly p-3">
+						<div class="text-center bg-blue-200 shadow-2xl p-2 rounded-md">
+							<h1 class="text-2xl font-bold">0</h1>
+							<h1>Payment Transactions</h1>
+						</div>
+						<div class="text-center bg-blue-200 shadow-2xl p-2 rounded-md">
+							<h1 class="text-2xl font-bold">0</h1>
+							<h1>Pending</h1>
+						</div>
+						<div class="text-center bg-blue-200 shadow-2xl p-2 rounded-md">
+							<h1 class="text-2xl font-bold">0</h1>
+							<h1>Completed</h1>
+						</div>
+						<div class="text-center bg-blue-200 shadow-2xl p-2 rounded-md">
+							<h1 class="text-2xl font-bold">0</h1>
+							<h1>Total Payment Sent</h1>
+						</div>
+					</div>
+					<!-- end of boxes stuff -->
+					<!--Container-->
+					<div class="container p-5" id="users">
+						<h3><strong>RESERVATION</strong></h3>
+						<!--Card-->
+						<div id='recipients' class="p-8 mt-6 lg:mt-0 rounded shadow-2xl bg-white">
+							<table id="example1" class="stripe hover" style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
+								<thead class="border-b border-primary-200 bg-primary-100 text-neutral-800">
+								<th>User Info</th>
+								<th>Reservation Info</th>
+								<th>Action</th>
+								</thead>
+							</table>
+						</div>
+						<!-- end of Card-->
+					</div>
+					<!-- end of container-->
+				</div>
+				<!-- end of content div (reservation) -->
+				<!-- content div (burial booking) -->
+				<div id="burial_booking" class="hidden flex-col">
+					<!-- buttons -->
+					<!-- boxes stuff -->
+					<div class="flex flex-row justify-evenly p-3">
+						<div class="text-center bg-blue-200 shadow-2xl p-2 rounded-md">
+							<h1 class="text-2xl font-bold">0</h1>
+							<h1>Payment Transactions</h1>
+						</div>
+						<div class="text-center bg-blue-200 shadow-2xl p-2 rounded-md">
+							<h1 class="text-2xl font-bold">0</h1>
+							<h1>Pending</h1>
+						</div>
+						<div class="text-center bg-blue-200 shadow-2xl p-2 rounded-md">
+							<h1 class="text-2xl font-bold">0</h1>
+							<h1>Completed</h1>
+						</div>
+						<div class="text-center bg-blue-200 shadow-2xl p-2 rounded-md">
+							<h1 class="text-2xl font-bold">0</h1>
+							<h1>Total Payment Sent</h1>
+						</div>
+					</div>
+					<!-- end of boxes stuff -->
+					<!--Container-->
+					<div class="container p-5" id="users">
+						<h3><strong>BURIAL BOOKING</strong></h3>
+						<!--Card-->
+						<div id='recipients' class="p-8 mt-6 lg:mt-0 rounded shadow-2xl bg-white">
+							<table id="example2" class="stripe hover" style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
+								<thead class="border-b border-primary-200 bg-primary-100 text-neutral-800">
+								<th>User Info</th>
+								<th>Reservation Info</th>
+								<th>Action</th>
+								</thead>
+							</table>
+						</div>
+						<!-- end of Card-->
+					</div>
+					<!-- end of container-->
+				</div>
+				<!-- end of content div (burial booking) -->
         </div>
     </div>
     <!-- end of main div -->
     <!-- scripts -->
+    <!-- jQuery -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <!-- Datatables -->
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var table = $('#example1').DataTable({
+                responsive: true
+            })
+                .columns.adjust()
+                .responsive.recalc();
+        });
+
+		$(document).ready(function () {
+            var table = $('#example2').DataTable({
+                responsive: true
+            })
+                .columns.adjust()
+                .responsive.recalc();
+        });
+    </script>
     <script src="../javascript//user-menu.js"></script>
+	<script src="../javascript//payments.js"></script>
 </body>
 </html>
