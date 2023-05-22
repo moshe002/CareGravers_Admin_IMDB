@@ -14,5 +14,11 @@
     $chatSessions = array_map(function($item) {
         return $item[0];
     }, $results);
-    echo json_encode($chatSessions);
+    $userChats = [];
+    foreach ($chatSessions as $key => $value) {
+        $sql = mysqli_query($conn, "SELECT `userID`, `fName`, `lName`, `userName`, `userEmail` FROM `user` WHERE `userID` = '$value'");
+        $result = mysqli_fetch_assoc($sql);
+        array_push($userChats,$result);
+    }
+    echo json_encode($userChats);
 ?>
