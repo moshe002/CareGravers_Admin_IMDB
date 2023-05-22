@@ -41,9 +41,7 @@ function createContactList(contacts) {
         p2.textContent = '';
         nameAndMessageDiv.appendChild(p2);
         // // Create third paragraph inside nameAndMessageDiv
-        // var p3 = document.createElement('p');
-        // p3.className = 'text-grey-dark mt-1 text-sm';
-        // p3.textContent = 'asdasd paragraph';
+        
         // innerDiv.appendChild(p3);
         // Append nameAndMessageDiv to innerDiv
         innerDiv.appendChild(nameAndMessageDiv);
@@ -97,7 +95,7 @@ function fetchChatMessages() {
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
-            //     console.log(xhr.responseText);
+                // console.log(xhr.responseText);
             var chatMessages = JSON.parse(xhr.responseText);
             displayChatMessages(chatMessages);
         }
@@ -111,7 +109,9 @@ function fetchChatMessages() {
 // Display chat messages in the chat area
 function displayChatMessages(chatMessages) {
     var messageContainer = document.getElementById("messages-area");
-    chatMessages.forEach(function (message) {
+    chatMessages.forEach(function (message) {        
+        var p3 = document.getElementById('current');
+        p3.textContent = message.sender;
         switch (message['SentOrReceived']) {
             case "sent":
                 // Create the outer div element

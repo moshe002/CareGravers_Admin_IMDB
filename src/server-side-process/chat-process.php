@@ -16,19 +16,18 @@
             $results = mysqli_fetch_all($sqlReceive, MYSQLI_ASSOC);
             foreach ($results as $result){
                 // $userID = $result['senderUID'];
-                // $sql = mysqli_query($conn, "SELECT `fName` FROM `user` WHERE `userID`='$userID';");
-                // $senderName = mysqli_fetch_assoc($sql);"sender" => $senderName['fName'],
-                array_push($allMessages, array("SentOrReceived" => "received", "chatID" => $result['chatID'], "chatMessage" => $result['chatMessage'], "chatTimestamp" => $result['sentDate']));
+                $sql = mysqli_query($conn, "SELECT `fName` FROM `user` WHERE `userID`='$userID';");
+                $senderName = mysqli_fetch_assoc($sql);
+                array_push($allMessages, array("SentOrReceived" => "received", "chatID" => $result['chatID'], "sender" => $senderName['fName'], "chatMessage" => $result['chatMessage'], "chatTimestamp" => $result['sentDate']));
             }
         }
         $sqlReceive = mysqli_query($conn,"SELECT * FROM `chat` WHERE `receiverUID` = '$userID' AND `senderUID` = '5000'");       
         if ($sqlReceive){
             $results = mysqli_fetch_all($sqlReceive, MYSQLI_ASSOC);
             foreach ($results as $result){
-                // $userID = $result['senderUID'];
-                // $sql = mysqli_query($conn, "SELECT `fName` FROM `user` WHERE `userID`='$userID';");
-                // $senderName = mysqli_fetch_assoc($sql);"sender" => $senderName['fName'],
-                array_push($allMessages, array("SentOrReceived" => "sent", "chatID" => $result['chatID'], "chatMessage" => $result['chatMessage'], "chatTimestamp" => $result['sentDate']));
+                $sql = mysqli_query($conn, "SELECT `fName` FROM `user` WHERE `userID`='$userID';");
+                $senderName = mysqli_fetch_assoc($sql);
+                array_push($allMessages, array("SentOrReceived" => "sent", "chatID" => $result['chatID'], "sender" => $senderName['fName'], "chatMessage" => $result['chatMessage'], "chatTimestamp" => $result['sentDate']));
             }
         }
         //all sent messages
