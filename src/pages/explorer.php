@@ -230,7 +230,7 @@
 					</div>
 				</div>
 				<!-- end of legend -->
-				<!-- sidebar (available) -->
+				<!-- sidebar (occupied) of map -->
 				<div id="sidebar" class="hidden flex-col h-screen p-5 absolute top-24 right-0 z-10 overflow-auto duration-200">
 					<br>
 					<!-- close button of sidebar map -->
@@ -255,15 +255,15 @@
 					&nbsp;
 					<div class="w-full">
 						<select class="w-full font-bold outline-none" id="status" onchange="updateStatus()">
-							<option class="font-bold" value="available">Available</option>
 							<option class="font-bold" value="occupied">Occupied</option>
+							<option class="font-bold" value="available">Available</option>
 							<option class="font-bold" value="reserved">Reserved</option>
 						</select>
 					</div>
 					</div>
 					<div id="nameT" class="flex flex-row items-center p-2 border-b-2 w-full text-sm">
 						<h1>Name:</h1>
-						<input id="name" class="p-1 outline-none w-3/4 font-bold" type="text" disabled />
+						<input id="name" class="p-1 outline-none w-3/4 font-bold" type="text" value="Jose Rizal" disabled />
 						<img onclick="(function(){
 							const edit_name = document.getElementById('name');
 							edit_name.disabled = !edit_name.disabled;
@@ -271,7 +271,7 @@
 					</div>
 					<div id="dobT" class="flex flex-row justify-between items-center p-2 border-b-2 w-full text-sm">
 						<h1>Date of Birth:</h1>
-						<input id="dob" class="hide-icon outline-none w-24 font-bold" type="date" disabled />
+						<input id="dob" class="hide-icon outline-none w-24 font-bold" type="date" value="2000-05-05" disabled />
 						<img onclick="(function(){
 							const edit_dob = document.getElementById('dob');
 							edit_dob.disabled = !edit_dob.disabled;
@@ -279,7 +279,7 @@
 					</div>
 					<div id="dodT" class="flex flex-row justify-between items-center p-2 border-b-2 w-full text-sm">
 						<h1>Date of Death:</h1>
-						<input id="dod" class="hide-icon outline-none w-24 font-bold" type="date" disabled />
+						<input id="dod" class="hide-icon outline-none w-24 font-bold" type="date" value="2010-01-10" disabled />
 						<img onclick="(function(){
 							const edit_dod = document.getElementById('dod');
 							edit_dod.disabled = !edit_dod.disabled;
@@ -287,7 +287,7 @@
 					</div>
 					<div class="flex flex-row justify-between items-center p-2 border-b-2 w-full text-sm">
 						<h1>Block Number:</h1>
-						<input id="blockNo" class="p-1 outline-none w-20 font-bold" type="number" disabled />
+						<input id="blockNo" class="p-1 outline-none w-20 font-bold" value="2" type="number" disabled />
 						<img onclick="(function(){
 							const edit_blockNo = document.getElementById('blockNo');
 							edit_blockNo.disabled = !edit_blockNo.disabled;
@@ -295,21 +295,17 @@
 					</div>
 					<div class="flex flex-row justify-between items-center p-2 border-b-2 w-full text-sm">
 						<h1>Lot Number:</h1>
-						<input id="lotNo" class="p-1 outline-none w-20 font-bold" type="number" disabled />
+						<input id="lotNo" class="p-1 outline-none w-20 font-bold" value="59" type="number" disabled />
 						<img onclick="(function(){
 							const edit_lotNo = document.getElementById('lotNo');
 							edit_lotNo.disabled = !edit_lotNo.disabled;
 						})();" class="w-5 h-5 cursor-pointer" src="../assets//icons//edit_pencil_icon.png" alt="edit_icon">
 					</div>
-					<div id="file_upload" class="flex flex-col relative justify-evenly items-center mt-3 p-5 bg-gray-100 rounded-md shadow-2xl">
-						<img class="h-8 w-8" src="../assets//icons//drag_drop_icon.png" alt="drag_drop_icon">	
-						<div id="dropContainer" class="flex flex-col justify-center text-sm text-center">
-							<p>Drag and Drop photo</p>
-							<p>or</p>
-						</div>
-						<label class="bg-blue-400 p-2 text-white rounded-md" for="upload">
-							<input class="hidden" id="upload" type="file">
-							Browse
+					<div id="graveImageT" class="flex relative justify-center items-center mt-3">
+						<img id="graveImage" src="../assets//images//choose_image_bg.png" class="filter brightness-50 w-52 h-40" alt="choose_img">
+						<label class="absolute left-12 rounded-md border-2 border-white text-sm text-white p-3 bg-transparent" for="choose_pic">
+							<input id="choose_pic" class="hidden" type="file" />
+							Choose image
 						</label>
 					</div>
 					<div class="flex flex-row items-center justify-evenly p-3">
@@ -319,7 +315,8 @@
 							Save</button>
 					</div>
 					<br>
-				</div>
+				</div> 
+				<!-- end of (occupied) sidebar map -->
 		</div>
     </div>
     <!-- end of main div -->

@@ -11,3 +11,7 @@
   input[type="file"] {
     display: none;
   }
+  
+  .image-filter {
+    filter: grayscale(50%) opacity(70%);
+  }
