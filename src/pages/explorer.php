@@ -13,7 +13,8 @@
 	<link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
 	<!-- Responsive Extension Datatables CSS -->
 	<link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css" rel="stylesheet">
-    <title>Explorer</title>
+	<link rel="stylesheet" href="../css//disabled-info.css">
+	<title>Explorer</title>
     <style>
         #map {
             height: 82vh;
@@ -191,81 +192,151 @@
                 <!-- end of top navbar -->
                 <!-- PUT CONTENT HERE -->
                 <div id="map" class="border-2 duration-200"></div>
-					<!-- sidebar of map -->
-					<div id="sidebar" class="hidden flex-col h-screen p-5 absolute top-20 right-0 z-10 duration-200">
-						<!-- close button of sidebar map -->
-						<button 
-							class="absolute top-5 right-1"
-							onclick="(function(){
-								document.getElementById('sidebar').style.display = 'none';
-								document.getElementById('map').style.width = '100%';
-							})();">&#10006;
-						</button>    
-						<br>
-						<br>
-						<div class="flex w-full justify-center items-center rounded-md border-2 border-green-400">
-							<input class="outline-none p-2 w-full rounded-md focus:outline-blue-400 duration-150" type="search" placeholder="Search here...">
-							<button class="rounded-md p-2.5 bg-blue-500">
-								<img class="w-5 h-5" src="../assets//icons//search_icon.png" alt="search_icon">
-							</button>
+				 <!-- legend -->
+				<div class="flex flex-col gap-3 absolute bottom-10 left-10 p-3 bg-gray-100 shadow-md rounded-md z-50">
+					<div class="flex flex-col gap-3">
+						<h1 class="font-semibold">Grave Classification</h1>
+						<div class="flex flex-col gap-3">
+							<div class="flex">
+								<img src="..//assets//icons//lawn_lot_box.png" alt="lawn_lot">
+								<h1 class="text-gray-500 font-semibold">&nbsp;&nbsp;Lawn Lot</h1>
+							</div>
+							<div class="flex">
+								<img src="..//assets//icons//garden_niche_box.png" alt="garden_niche">
+								<h1 class="text-gray-500 font-semibold">&nbsp;&nbsp;Garden Niche</h1>
+							</div>
+							<div class="flex">
+								<img src="..//assets//icons//family_estate_box.png" alt="family_estate">
+								<h1 class="text-gray-500 font-semibold">&nbsp;&nbsp;Family Estate</h1>
+							</div>
 						</div>
-						<div class="flex p-2 border-b-2 w-full text-sm">
-							<h1>Status:</h1>
-							&nbsp;
-							<h1><b id="status"></b></h1>
+					</div>
+					<div class="flex flex-col gap-3">
+						<h1 class="font-semibold">Lot Status</h1>
+						<div class="flex flex-col gap-3">
+							<div class="flex">
+								<img src="..//assets//icons//available_box.png" alt="available">
+								<h1 class="text-gray-500 font-semibold">&nbsp;&nbsp;Available</h1>
+							</div>
+							<div class="flex">
+								<img src="..//assets//icons//reserved_box.png" alt="reserved">
+								<h1 class="text-gray-500 font-semibold">&nbsp;&nbsp;Reserved</h1>
+							</div>
+							<div class="flex">
+								<img src="..//assets//icons//occupied_box.png" alt="occupied">
+								<h1 class="text-gray-500 font-semibold">&nbsp;&nbsp;Occupied</h1>
+							</div>
 						</div>
-						<div id="nameT" class="p-2 border-b-2 w-full text-sm" style="display:none">
-							<h1>Deceased Name:</h1>
-							&nbsp;
-							<h1><b id="name"></b></h1>
+					</div>
+				</div>
+				<!-- end of legend -->
+				<!-- sidebar (available) -->
+				<div id="sidebar" class="hidden flex-col h-screen p-5 absolute top-24 right-0 z-10 overflow-auto duration-200">
+					<br>
+					<!-- close button of sidebar map -->
+					<button 
+						class="absolute top-10 right-3"
+						onclick="(function(){
+							document.getElementById('sidebar').style.display = 'none';
+							document.getElementById('map').style.width = '100%';
+						})();">&#10006;
+					</button>    
+					<br>
+					<br>
+					<div class="flex w-full justify-center items-center rounded-md border-2 -z-10">
+						<input class="outline-none p-2 w-full rounded-md focus:outline-blue-400 duration-150" type="search" placeholder="Search here...">
+						<button class="rounded-md p-2.5 bg-blue-500">
+							<img class="w-5 h-5" src="../assets//icons//search_icon.png" alt="search_icon">
+						</button>
+					</div>
+					<br>
+					<div class="flex p-2 border-b-2 w-full text-sm">
+					<h1>Status:</h1>
+					&nbsp;
+					<div class="w-full">
+						<select class="w-full font-bold outline-none" id="status" onchange="updateStatus()">
+							<option class="font-bold" value="available">Available</option>
+							<option class="font-bold" value="occupied">Occupied</option>
+							<option class="font-bold" value="reserved">Reserved</option>
+						</select>
+					</div>
+					</div>
+					<div id="nameT" class="flex flex-row items-center p-2 border-b-2 w-full text-sm">
+						<h1>Name:</h1>
+						<input id="name" class="p-1 outline-none w-3/4 font-bold" type="text" disabled />
+						<img onclick="(function(){
+							const edit_name = document.getElementById('name');
+							edit_name.disabled = !edit_name.disabled;
+						})();" class="w-5 h-5 cursor-pointer" src="../assets//icons//edit_pencil_icon.png" alt="edit_icon">
+					</div>
+					<div id="dobT" class="flex flex-row justify-between items-center p-2 border-b-2 w-full text-sm">
+						<h1>Date of Birth:</h1>
+						<input id="dob" class="hide-icon outline-none w-24 font-bold" type="date" disabled />
+						<img onclick="(function(){
+							const edit_dob = document.getElementById('dob');
+							edit_dob.disabled = !edit_dob.disabled;
+						})();" class="w-5 h-5 cursor-pointer" src="../assets//icons//calendar_icon.png" alt="calendar_icon">
+					</div>
+					<div id="dodT" class="flex flex-row justify-between items-center p-2 border-b-2 w-full text-sm">
+						<h1>Date of Death:</h1>
+						<input id="dod" class="hide-icon outline-none w-24 font-bold" type="date" disabled />
+						<img onclick="(function(){
+							const edit_dod = document.getElementById('dod');
+							edit_dod.disabled = !edit_dod.disabled;
+						})();" class="w-5 h-5 cursor-pointer" src="../assets//icons//calendar_icon.png" alt="calendar_icon">
+					</div>
+					<div class="flex flex-row justify-between items-center p-2 border-b-2 w-full text-sm">
+						<h1>Block Number:</h1>
+						<input id="blockNo" class="p-1 outline-none w-20 font-bold" type="number" disabled />
+						<img onclick="(function(){
+							const edit_blockNo = document.getElementById('blockNo');
+							edit_blockNo.disabled = !edit_blockNo.disabled;
+						})();" class="w-5 h-5 cursor-pointer" src="../assets//icons//edit_pencil_icon.png" alt="edit_icon">
+					</div>
+					<div class="flex flex-row justify-between items-center p-2 border-b-2 w-full text-sm">
+						<h1>Lot Number:</h1>
+						<input id="lotNo" class="p-1 outline-none w-20 font-bold" type="number" disabled />
+						<img onclick="(function(){
+							const edit_lotNo = document.getElementById('lotNo');
+							edit_lotNo.disabled = !edit_lotNo.disabled;
+						})();" class="w-5 h-5 cursor-pointer" src="../assets//icons//edit_pencil_icon.png" alt="edit_icon">
+					</div>
+					<div id="file_upload" class="flex flex-col relative justify-evenly items-center mt-3 p-5 bg-gray-100 rounded-md shadow-2xl">
+						<img class="h-8 w-8" src="../assets//icons//drag_drop_icon.png" alt="drag_drop_icon">	
+						<div id="dropContainer" class="flex flex-col justify-center text-sm text-center">
+							<p>Drag and Drop photo</p>
+							<p>or</p>
 						</div>
-						<div id="dobT" style="display:none" class="p-2 border-b-2 w-full text-sm">
-							<h1>Date of Birth:</h1>
-							&nbsp;
-							<h1><b id="dob"></b></h1>
-						</div>
-						<div id="dodT" style="display:none" class="p-2 border-b-2 w-full text-sm">
-							<h1>Date of Death:</h1>
-							&nbsp;
-							<h1><b id="dod"></b></h1>
-						</div>
-						<div class="flex p-2 border-b-2 w-full text-sm">
-							<h1>Block Number:</h1>
-							&nbsp;
-							<h1><b id="blockNo"></b></h1>
-						</div>
-						<div class="flex p-2 border-b-2 w-full text-sm">
-							<h1>Lot Number:</h1>
-							&nbsp;
-							<h1><b id="lotNo"></b></h1>
-						</div>
-						<div id="graveImageT" class="justify-center w-full border-2" style="display:none">
-							<img id="graveImage" class="w-20 h-20" alt="tombstone">
-						</div>
-						<div id="graveClassT" style="display:none" class="p-2 border-b-2 w-full">
-							<h1>Grave Classification:</h1>
-							&nbsp;
-							<h1><b id="graveClass"></b></h1>
-						</div>
-						<div id="priceT" style="display:none" class="p-2 border-b-2 w-full">
-							<h1>Price:</h1>&nbsp;
-							<h1><b id="price">;
-							</b></h1>
-						</div>
-						<br>
-						<div id="buttonAvailableT" style="display:none" class="justify-center w-full">
-							<!-- onclick open modal -->
-							<button onclick="(function(){
-								document.getElementById('payment_modal').style.display = 'flex';
-							})();" class="bg-blue-500 text-white p-2 w-1/2 font-semibold rounded-md">Reserve Now</button>
-						</div>
-					</div> 
-					<!-- end of sidebar map -->
+						<label class="bg-blue-400 p-2 text-white rounded-md" for="upload">
+							<input class="hidden" id="upload" type="file">
+							Browse
+						</label>
+					</div>
+					<div class="flex flex-row items-center justify-evenly p-3">
+						<button class="bg-blue-400 text-white px-3 py-1 rounded-md opacity-75 hover:opacity-100 duration-150">
+							Clear</button>
+						<button class="bg-blue-400 text-white px-3 py-1 rounded-md opacity-75 hover:opacity-100 duration-150">
+							Save</button>
+					</div>
+					<br>
+				</div>
 		</div>
     </div>
     <!-- end of main div -->
     <script src="../javascript//user-menu.js"></script>
     <script src="../javascript//googlemap.js"></script>
     <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8BUuSDeRsrMGCh07tzXoW7UhCr-A2ESI&callback=initMap"></script>
+	
+	<!-- Script para sa Dropdown arrow sa status -->
+	<script>
+	function updateStatus() {
+		var statusElement = document.getElementById("status");
+		var selectedStatus = statusElement.value;
+		
+		// Do something with the selectedStatus value
+		console.log("Selected status:", selectedStatus);
+	}
+	</script>
+	<script src="../javascript//drag-drop.js"></script>
 </body>
 </html>

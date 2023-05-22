@@ -10,7 +10,7 @@ include("crud.php");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>PRICING </title>
+    <title>Pricing</title>
     <meta name="description" content="">
     <meta name="keywords" content="">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v6.0.0-beta3/css/all.css" integrity="...your-integrity-value-here..." crossorigin="anonymous" />
@@ -252,7 +252,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
             <!-- end of the uh, account button something nga drop down -->
           </div>
           <!-- end of top navbar -->
-          <!--Container--><br><br>
+          <!--Container-->
           <div class="container p-7" id="users">
                       <h3><strong>PRICING</strong></h3>
                       <!--Card-->
