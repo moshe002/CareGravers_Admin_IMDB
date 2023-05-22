@@ -1,9 +1,3 @@
-<?php
-include("database.php");
-$sql = "SELECT deceased.deceasedID, deceased.nameOfDeceased, deceased.dateOfBirth, deceased.dateOfDeath, gravesite.graveCoordinates, gravesite.gravesiteClassification FROM deceased INNER JOIN gravesite ON deceased.gravesiteID = gravesite.gravesiteID";
-$result = mysqli_query($conn, $sql);
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
