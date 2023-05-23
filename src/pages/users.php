@@ -1,25 +1,21 @@
 <?php
-include("fetch_database.php");
+	include("fetch_database.php");
 ?>
 <!DOCTYPE html>
 <html lang="en" class="antialiased">
-
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>USERS </title>
 	<meta name="description" content="">
 	<meta name="keywords" content="">
 	<link href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" rel=" stylesheet">
-	<!--Replace with your tailwind.css once created-->
-
-
-	<!--Regular Datatables CSS-->
+	<!-- Replace with your tailwind.css once created -->
+	<!-- Regular Datatables CSS -->
 	<link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
-	<!--Responsive Extension Datatables CSS-->
+	<!-- Responsive Extension Datatables CSS -->
 	<link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css" rel="stylesheet">
-
+	<title>Users</title>
 	<style>
 		/*Form fields*/
 		.dataTables_wrapper select,
@@ -64,7 +60,7 @@ include("fetch_database.php");
 		/*Pagination Buttons - Hover */
 		.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
 			color: #fff !important;
-			box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06);/
+			box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06);
 			font-weight: 700;
 			border-radius: .25rem;
 			background: #23A6F0 !important;
@@ -116,13 +112,13 @@ include("fetch_database.php");
                         foreach($fetchData as $data){
                 ?>
                 <tr>
-                    <td><?php echo $data['userID']?></td>
-                    <td><?php echo $data['fName']?></td>
-                    <td><?php echo $data['lName']?></td>
-                    <td><?php echo $data['userEmail']?></td>
-                    <td><?php echo $data['userName']?></td>
-                    <td><?php echo $data['contactNo'] ?></td>
-                    <td><?php echo $data['dateJoined']?></td>  
+                    <td><?php echo $data['userID']??''; ?></td>
+                    <td><?php echo $data['fName']??''; ?></td>
+                    <td><?php echo $data['lName']??''; ?></td>
+                    <td><?php echo $data['userEmail']??''; ?></td>
+                    <td><?php echo $data['userName']??''; ?></td>
+                    <td><?php echo $data['contactNo']??''; ?></td>
+                    <td><?php echo $data['dateJoined']??''; ?></td>  
                 </tr>
                 <?php $sn++;}}
                     else{ ?>
@@ -138,10 +134,9 @@ include("fetch_database.php");
 		</div>
 		<!--/Card-->
 	</div>
-	<!--/container-->
 	<!-- jQuery -->
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	<!--Datatables -->
+	<!-- Datatables  -->
 	<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 	<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
 	<script>
@@ -154,7 +149,6 @@ include("fetch_database.php");
 				.responsive.recalc();
 		});
 	</script>
-
+	<script src="../javascript//user-menu.js"></script>
 </body>
-
 </html>
