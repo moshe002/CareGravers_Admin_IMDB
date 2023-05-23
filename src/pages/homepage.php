@@ -218,7 +218,7 @@
 				</div>
 				<!-- end of content div (reservation) -->
                 <!--CHART-->
-                <div class="text-gray-500 rounded shadow-xl py-5 px-5 w-full sm:w-2/4 px-1.5 ml-14 mt-20" x-data="{chartData:chartData()}" x-init="chartData.fetch()">
+                <div class="text-gray-500 rounded shadow-xl w-full sm:w-2/4 px-1.5 ml-14 mt-2" x-data="{chartData:chartData()}" x-init="chartData.fetch()">
                     <div class="flex flex-wrap items-end">
                         <div class="flex-1">
                             <h3 class="text-lg font-semibold leading-tight">Income</h3>
