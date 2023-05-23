@@ -116,13 +116,13 @@ include("fetch_database.php");
                         foreach($fetchData as $data){
                 ?>
                 <tr>
-                    <td><?php echo $data['userID']??''; ?></td>
-                    <td><?php echo $data['fName']??''; ?></td>
-                    <td><?php echo $data['lName']??''; ?></td>
-                    <td><?php echo $data['userEmail']??''; ?></td>
-                    <td><?php echo $data['userName']??''; ?></td>
-                    <td><?php echo $data['contactNo']??''; ?></td>
-                    <td><?php echo $data['dateJoined']??''; ?></td>  
+                    <td><?php echo $data['userID']?></td>
+                    <td><?php echo $data['fName']?></td>
+                    <td><?php echo $data['lName']?></td>
+                    <td><?php echo $data['userEmail']?></td>
+                    <td><?php echo $data['userName']?></td>
+                    <td><?php echo $data['contactNo'] ?></td>
+                    <td><?php echo $data['dateJoined']?></td>  
                 </tr>
                 <?php $sn++;}}
                     else{ ?>
