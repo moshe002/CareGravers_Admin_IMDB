@@ -30,18 +30,6 @@
                 array_push($allMessages, array("SentOrReceived" => "sent", "chatID" => $result['chatID'], "sender" => $senderName['fName'], "chatMessage" => $result['chatMessage'], "chatTimestamp" => $result['sentDate']));
             }
         }
-        //all sent messages
-        // $sqlSent = mysqli_query($conn,"SELECT * FROM `chat` WHERE `senderUID` = '5000' AND `receiverUID` = '12'");
-        // if ($sqlSent){
-        //     $results = mysqli_fetch_all($sqlSent, MYSQLI_ASSOC);
-        //     foreach ($results as $result){ 
-        //         array_push($allMessages, array("SentOrReceived" => "sent","chatID" => $result['chatID'], "chatMessage" => $result['chatMessage'], "chatTimestamp" => $result['sentDate']));
-        //     }
-        // }
-        // // error handling
-        // if ($sqlReceive == false && $sqlSent == false){
-        //     echo "Lost connection to the server. Please refresh the page.";
-        // } 
     }    
     
     

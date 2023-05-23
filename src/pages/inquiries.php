@@ -2,7 +2,7 @@
 	session_start();
 	if(!isset($_SESSION["login"]))
 		header("location:/CareGraver_ADMIN/src/pages/login.php"); 
-	$loggedInAdmin = $_SESSION["loggedInAdmin"];
+	isset($_SESSION["loggedInAdmin"]) ? $loggedInAdmin = $_SESSION["loggedInAdmin"] : false;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -191,6 +191,6 @@
     </div>
     <!-- end of main div -->
     <!-- scripts -->
-    <script src="../javascript//user-menu.js"></script>
+    <script src="../javascript/user-menu.js"></script>
 </body>
 </html>

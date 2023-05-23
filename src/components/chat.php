@@ -116,4 +116,3 @@
 </body>
 </html>
 <script src="../javascript/chat.js"></script>
-<script src="../javascript/chat-message-display.js"></script>
