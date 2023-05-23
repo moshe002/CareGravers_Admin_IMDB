@@ -53,25 +53,6 @@ function createContactList(contacts) {
     });
 }
 
-// // Display chat messages for the selected user
-// function selectContact(userID) {
-//     selectedUserID = userID;
-//     // Clear previous chat messages
-//     var messagesArea = document.getElementById('messages-area');
-//     messagesArea.innerHTML = '';
-//     // Fetch chat messages for the selected user
-//     var xhr = new XMLHttpRequest();
-//     xhr.onreadystatechange = function () {
-//         if (xhr.readyState === 4 && xhr.status === 200) {
-//             var chatMessages = JSON.parse(xhr.responseText);
-//             displayChatMessages(chatMessages);
-//         }
-//     };
-//     xhr.open('POST', '../server-side-process/chat-process.php', true);
-//     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-//     xhr.send('userID=' + encodeURIComponent(userID));
-// }
-
 // Display chat messages for the selected user
 function selectContact(userID) {
     // Set the selected user ID
@@ -202,7 +183,6 @@ function convertTo12HourFormat(timestamp) {
     var timeParts = timestamp.split(':');
     var hours = parseInt(timeParts[0]);
     var minutes = parseInt(timeParts[1]);
-
     // Determine the period (AM or PM)
     var period = hours >= 12 ? 'PM' : 'AM';
 

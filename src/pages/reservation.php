@@ -40,16 +40,7 @@
 			<!-- end of admin image and name -->
 			<!-- sidebar buttons -->
 			<div class="flex flex-col gap-3 py-9 w-full h-full justify-evenly items-start g-white/10">
-				<button 
-					id="dashboard"
-					class="flex gap-3 p-2 text-white font-semibold w-full outline-none focus:bg-white focus:text-black duration-300" 
-					onclick="(function(){
-						window.location.href = 'homepage.php';
-					})();" 
-					>
-					<img id="dashboard_img" src="../assets//icons//white_dashboard_icon.png" alt="dashboard_icon">
-					Dashboard
-				</button>
+				
 				<button 
 					id="users"  
 					class="flex gap-3 p-2 text-white font-semibold w-full outline-none focus:bg-white focus:text-black duration-300"
@@ -102,16 +93,6 @@
 					Reservations
 				</button>
 				<button 
-					id="bookings" 
-					class="flex gap-2.5 p-2 text-white font-semibold w-full outline-none focus:bg-white focus:text-black duration-300" 
-					onclick="(function(){
-						window.location.href = 'bookings.php';
-					})();" 
-					>
-					<img id="bookings_img" class="ml-0.5" src="../assets//icons//white_bookings_icon.png" alt="bookings_icon"> 
-					Bookings
-				</button>
-				<button 
 					id="pricing" 
 					class="flex gap-3 p-2 text-white font-semibold w-full outline-none focus:bg-white focus:text-black duration-300" 
 					onclick="(function(){
@@ -120,16 +101,6 @@
 					>
 					<img id="pricing_img" class="ml-0.5" src="../assets//icons//white_pricing_icon.png" alt="pricing_icon"> 
 					Pricing
-				</button>
-				<button 
-					id="payments" 
-					class="flex gap-3 p-2 text-white font-semibold w-full outline-none focus:bg-white focus:text-black duration-300" 
-					onclick="(function(){
-						window.location.href = 'payments.php';
-					})();" 
-					>
-					<img id="payments_img" class="ml-0.5" src="../assets//icons//white_payments_icon.png" alt="payments_icon"> 
-					Payments
 				</button>
 			</div>
 			<!-- end of sidebar buttons -->
@@ -165,7 +136,7 @@
                                         <?php 
                                             //echo $loggedInUser["userEmail"];
                                         ?>
-                                        static@pani.com
+                                        icecream@gmail.com
                                     </h1 >
                                 </div>
                                 <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownHoverButton">
