@@ -1,6 +1,9 @@
 <?php
   include("database.php");
-  $sql = "SELECT deceased.deceasedID, deceased.nameOfDeceased, deceased.dateOfBirth, deceased.dateOfDeath, gravesite.graveCoordinates, gravesite.gravesiteClassification FROM deceased INNER JOIN gravesite ON deceased.gravesiteID = gravesite.gravesiteID";
+  $sql = "SELECT deceased.deceasedID, deceased.nameOfDeceased, deceased.dateOfBirth, deceased.dateOfDeath, gravesite.graveCoordinates, gravesiteclassification.graveClassification 
+  FROM deceased 
+  INNER JOIN gravesite ON deceased.gravesiteID = gravesite.gravesiteID
+  INNER JOIN gravesiteclassification ON gravesite.graveClassID = gravesiteclassification.graveClassID";
   $result = mysqli_query($conn, $sql);
 
   include("crud.php");
@@ -285,7 +288,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
                                           <td><?php echo $row["dateOfDeath"]; ?></td>
                                           <td><?php echo $block; ?></td>
                                           <td><?php echo $lot; ?></td>
-                                          <td><?php echo $row["gravesiteClassification"]; ?></td>
+                                          <td><?php echo $row["graveClassification"]; ?></td>
                                           <td>
                                               <!-- Trigger/Open The Modal -->
                                               <a id="myBtn" class="open-modal-btn text-blue-400 hover:text-pink-500 mx-2">
@@ -346,7 +349,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
                                       <label class="text-lg font-semibold leading-6 text-gray-900" for="gravesiteClassification">Gravesite Classification:</label>
                                       <input type="text" id="gravesiteClassification" name="gravesiteClassification"><br>
 
-                                      <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                                      <div class="px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
                                         <button type="submit" name="update" class="inline-flex w-full justify-center rounded-md bg-blue-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-yellow-100 hover:text-black sm:ml-3 sm:w-auto">Update</button>
                                         <span type="button" class="close mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto">Cancel</span>
                                       </div>
@@ -359,6 +362,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
                       </div>
                     </div>
                   </div>
+                  <!--end of Modal -->
         </div>
     </div>
     <!-- end of main div -->
