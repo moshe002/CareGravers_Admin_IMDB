@@ -130,27 +130,7 @@ include("database.php");
 
 //RESERVATION
     //Delete Operation
-   // Retrieve the requestReserveID from the AJAX request
-    $requestReserveID = $_GET   ['userID'];
 
-    // Connect to the database and update the approval column
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "caregraver";
-
-    $conn = new mysqli($servername, $username, $password, $dbname);
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
-    // Update the approval column in the requestreservation table
-    $sql = "UPDATE requestreservation SET approval = 1 WHERE requestReserveID = '$requestReserveID'";
-    if ($conn->query($sql) === TRUE) {
-        echo "Approval updated successfully";
-    } else {
-        echo "Error updating approval: " . $conn->error;
-    }
 
 //END OF RESERVATION
 ?>
