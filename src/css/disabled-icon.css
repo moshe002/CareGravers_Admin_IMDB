@@ -1,0 +1,17 @@
+.hide-icon::-webkit-calendar-picker-indicator {
+    display: none;
+  }
+  
+  .hide-icon::-webkit-inner-spin-button,
+  .hide-icon::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type="file"] {
+    display: none;
+  }
+  
+  .image-filter {
+    filter: grayscale(50%) opacity(70%);
+  }
