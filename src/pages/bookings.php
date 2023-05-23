@@ -1,19 +1,31 @@
-<?php 
+<?php
+  include("database.php");
+  $sql = "SELECT user.fName, user.lName, deceased.nameOfDeceased, booking_process.bookingID, burial_booking.bookDate, burial_booking.userID, burial_booking.deceasedID, burial_booking.burialDate, burial_booking.customMessage
+  FROM booking_process
+  INNER JOIN burial_booking ON booking_process.bookingID = burial_booking.bookingID 
+  INNER JOIN deceased ON burial_booking.deceasedID = deceased.deceasedID
+  INNER JOIN user ON user.userID = burial_booking.userID";
+  $result = mysqli_query($conn, $sql);
 
+  include("crud.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" rel=" stylesheet">
-	<!-- Replace with your tailwind.css once created -->
-	<!-- Regular Datatables CSS -->
-	<link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
-	<!-- Responsive Extension Datatables CSS -->
-	<link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css" rel="stylesheet">
-    <title>Bookings</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>BOOKINGS</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v6.0.0-beta3/css/all.css" integrity="...your-integrity-value-here..." crossorigin="anonymous" />
+    <link href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!--Replace with your tailwind.css once created-->
+    <!--Regular Datatables CSS-->
+    <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
+    <!--Responsive Extension Datatables CSS-->
+    <link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/deceased-info.css">
 </head>
 <body>
     <!-- main div -->
@@ -80,7 +92,7 @@
 				</button>
 				<button 
 					id="reservations" 
-					class="flex gap-4 p-2 text-white font-semibold w-full outline-none focus:bg-white focus:text-black duration-300"  
+					class="flex gap-4 p-2 text-white font-semibold w-full outline-none focus:bg-white focus:text-white duration-300"  
 					onclick="(function(){
 						window.location.href = 'reservation.php';
 					})();" 
@@ -91,7 +103,7 @@
 				<button 
                     autofocus
 					id="bookings" 
-					class="flex gap-2.5 p-2 text-white font-semibold w-full outline-none focus:bg-white focus:text-black duration-300" 
+					class="flex gap-2.5 p-2 text-black font-semibold w-full outline-none focus:bg-white focus:text-black duration-300" 
 					onclick="(function(){
 						window.location.href = 'bookings.php';
 					})();" 
@@ -124,8 +136,8 @@
 		</div>
 		<!-- end of sidebar -->
         <div class="w-full">
-                    <!-- top navbar -->
-                <div class="flex justify-between items-center h-1/6 w-full shadow-2xl">
+            <!-- top navbar -->
+            <div class="flex justify-between items-center h-1/6 w-full shadow-2xl">
                     <h1 class="ml-16 font-bold text-2xl">CareGraver</h1>
                     <!-- the uh, account button something nga drop down -->
                     <div class="flex gap-10 items-center justify-center mr-24">
@@ -178,16 +190,75 @@
                         </div>
                     </div>
                     <!-- end of the uh, account button something nga drop down -->
+            </div>
+            <!-- end of top navbar -->
+            <!--Container-->
+            <div class="container p-16" id="users">
+                <h3><strong>Burial Ceremony Bookings</strong></h3>
+                <!--Card-->
+                <div id='recipients' class="p-8 mt-6 lg:mt-0 rounded shadow-2xl bg-white">
+                    <table id="example" class="stripe hover overflow-x-scroll" style="width:100%; padding-top: 1em; padding-bottom: 1em;">
+                        <thead class="border-b border-primary-200 bg-primary-100 text-neutral-800">
+                        <th>User and Deceased Information </th>
+                        <th>Booking Process</th>
+                        <th>Message</th>
+						<th>Action</th>
+                        </thead>
+                        <?php
+                              if (mysqli_num_rows($result) > 0) {
+                                  while ($row = mysqli_fetch_array($result)) {
+                                      ?>
+                                      <tr>
+                                        <td>
+                                            <?php 
+                                                echo "Booking ID: " . $row["bookingID"]."<br>";
+                                                echo "Placed On: " . $row["bookDate"]."<br>";
+                                                echo "Booker's Name: " . $row["fName"].$row["lName"]."<br>";
+                                            ?>
+                                        </td>
+                                        <td>
+                                            <?php 
+                                                echo "Deceased Name: " . $row["nameOfDeceased"]."<br>";
+                                                echo "Burial Ceremony Date: " . $row["burialDate"]."<br>"; 
+                                            ?>
+                                        </td>
+										<td>
+                                            <?php echo "Booker's Notes: " . $row["customMessage"]."<br>" ?>
+                                        </td>
+                                          <td>
+                                              
+                                          <div class="px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6"><br>
+                                            <button type="submit" name="reject" id="reject" class="inline-flex w-full justify-center rounded-md bg-blue-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-pink-300 hover:text-black sm:ml-3 sm:w-auto">MANAGE</button>
+                                        </div> 
+                                              
+                                          </td>
+                                      </tr>
+                                      <?php
+                                  }
+                              }
+                              ?>
+                    </table>
                 </div>
-                <!-- end of top navbar -->
-                <!-- PUT CONTENT HERE -->
-                <div>
-                    <h1>bookings</h1>
-                </div>
+                <!--/Card-->
+            </div>
         </div>
     </div>
     <!-- end of main div -->
-    <!-- scripts -->
+    <!--/container-->
+    <!-- jQuery -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <!-- Datatables -->
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var table = $('#example').DataTable({
+                responsive: true
+            })
+                .columns.adjust()
+                .responsive.recalc();
+        });
+    </script>
     <script src="../javascript//user-menu.js"></script>
 </body>
 </html>

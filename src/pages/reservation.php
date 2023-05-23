@@ -1,6 +1,6 @@
 <?php
   include("database.php");
-  $sql = "SELECT user.userID, user.lName, user.fName, user.userEmail, gravesiteclassification.graveClassification, gravesite.graveCoordinates
+  $sql = "SELECT user.userID, user.lName, user.fName, user.userEmail, gravesiteclassification.graveClassification, gravesite.graveCoordinates, gravesite.availability
   FROM user 
   INNER JOIN gravesite ON user.userID = gravesite.userID
   INNER JOIN gravesiteclassification ON gravesiteclassification.graveClassID = gravesite.graveClassID";
@@ -210,7 +210,8 @@
                                       $split = explode(',', $graveCoordinates);
                                       $block = trim($split[0]);
                                       $lot = trim($split[1]);
-                                      ?>
+                                      if ($row["availability"] == "R"){
+                                        ?>
                                       <tr>
                                         <td>
                                             <?php 
@@ -224,6 +225,7 @@
                                                 echo "Gravesite Class: " . $row["graveClassification"]."<br>";
                                                 echo "Block: " . $block."<br>"; 
                                                 echo "Lot: " . $lot."<br>"; 
+                                                echo "Availability: " . $row["availability"]."<br>";
                                             ?>
                                         </td>
                                           <td>
@@ -238,6 +240,8 @@
                                           </td>
                                       </tr>
                                       <?php
+                                      }
+                                      
                                   }
                               }
                               ?>
