@@ -276,6 +276,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
                                             <td><?php echo $row["graveClassification"]; ?>
                                             </td>
                                             <td><?php echo $row["price"]; ?></td>
+                                            
                                           <td>
                                               <!-- Trigger/Open The Modal -->
                                               <a id="myBtn" class="open-modal-btn text-blue-400 hover:text-pink-500 mx-2">

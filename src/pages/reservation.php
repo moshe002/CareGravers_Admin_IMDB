@@ -1,3 +1,13 @@
+<?php
+  include("database.php");
+  $sql = "SELECT user.userID, user.lName, user.fName, user.userEmail, gravesiteclassification.graveClassification, gravesite.graveCoordinates
+  FROM user 
+  INNER JOIN gravesite ON user.userID = gravesite.userID
+  INNER JOIN gravesiteclassification ON gravesiteclassification.graveClassID = gravesite.graveClassID";
+  $result = mysqli_query($conn, $sql);
+
+  include("crud.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -186,12 +196,51 @@
                 <h3><strong>RESERVATIONS</strong></h3>
                 <!--Card-->
                 <div id='recipients' class="p-8 mt-6 lg:mt-0 rounded shadow-2xl bg-white">
-                    <table id="example" class="stripe hover" style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
+                    <table id="example" class="stripe hover overflow-x-scroll" style="width:100%; padding-top: 1em; padding-bottom: 1em;">
                         <thead class="border-b border-primary-200 bg-primary-100 text-neutral-800">
                         <th>User Info</th>
                         <th>Reservation Info</th>
                         <th>Action</th>
                         </thead>
+                        <?php
+                              if (mysqli_num_rows($result) > 0) {
+                                  while ($row = mysqli_fetch_array($result)) {
+                                      // Split the graveCoordinates
+                                      $graveCoordinates = $row['graveCoordinates'];
+                                      $split = explode(',', $graveCoordinates);
+                                      $block = trim($split[0]);
+                                      $lot = trim($split[1]);
+                                      ?>
+                                      <tr>
+                                        <td>
+                                            <?php 
+                                                echo "ID: " . $row["userID"]."<br>";
+                                                echo "Name: " . $row["fName"].$row["lName"]."<br>";
+                                                echo "Email: " . $row["userEmail"]."<br>";
+                                            ?>
+                                        </td>
+                                        <td>
+                                            <?php 
+                                                echo "Gravesite Class: " . $row["graveClassification"]."<br>";
+                                                echo "Block: " . $block."<br>"; 
+                                                echo "Lot: " . $lot."<br>"; 
+                                            ?>
+                                        </td>
+                                          <td>
+                                              
+                                          <div class="px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6"><br>
+                                            <button type="submit" name="reject" id="reject" class="inline-flex w-full justify-center rounded-md bg-red-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-pink-300 hover:text-black sm:ml-3 sm:w-auto">Reject</button>
+                                            <button type="submit" name="approve" id="approve" class="inline-flex w-full justify-center rounded-md bg-green-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-pink-300 hover:text-black sm:ml-3 sm:w-auto">Approve</button>
+                                            <button type="submit" name="email" id="email" class="inline-flex w-full justify-center rounded-md bg-blue-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-pink-300 hover:text-black sm:ml-3 sm:w-auto">Email</button>
+ 
+                                        </div> 
+                                              
+                                          </td>
+                                      </tr>
+                                      <?php
+                                  }
+                              }
+                              ?>
                     </table>
                 </div>
                 <!--/Card-->
