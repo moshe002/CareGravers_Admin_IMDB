@@ -183,7 +183,7 @@ function convertTo12HourFormat(timestamp) {
     var timeParts = timestamp.split(':');
     var hours = parseInt(timeParts[0]);
     var minutes = parseInt(timeParts[1]);
-    // Determine the period (AM or PM)
+        // Determine the period (AM or PM)
     var period = hours >= 12 ? 'PM' : 'AM';
 
     // Convert hours to 12-hour format

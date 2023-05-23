@@ -199,7 +199,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
                       <?php 
                         //echo $loggedInUser["userEmail"];
                       ?>
-                      image.png
+                      icecream@gmail.com
                     </h1 >
                   </div>
                   <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownHoverButton">
