@@ -130,7 +130,7 @@ include("database.php");
 
 //RESERVATION
     //Delete Operation
-
+    
 
 //END OF RESERVATION
 ?>

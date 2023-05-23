@@ -1,6 +1,6 @@
 <?php
   include("database.php");
-  $sql = "SELECT rr.userID, u.fName, u.lName, u.userEmail, gs.graveClassID, gc.graveClassification, gs.graveCoordinates, gs.availability
+  $sql = "SELECT rr.userID, rr.approval, rr.gravesiteID, u.fName, u.lName, u.userEmail, gs.graveClassID, gc.graveClassification, gs.graveCoordinates, gs.availability
   FROM requestreservation rr
   INNER JOIN user u ON rr.userID = u.userID
   INNER JOIN gravesite gs ON rr.gravesiteID = gs.graveClassID
@@ -211,7 +211,7 @@
                                       $split = explode(',', $graveCoordinates);
                                       $block = trim($split[0]);
                                       $lot = trim($split[1]);
-                                     
+                                      
                                     ?>
                                       <tr>
                                         <td>
@@ -230,15 +230,20 @@
                                             ?>
                                         </td>
                                           <td>
-                                              
-                                          <div class="px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6"><br>
-                                            <button type="submit" name="reject" id="reject" class="open-modal-btn inline-flex w-full justify-center rounded-md bg-red-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-pink-300 hover:text-black sm:ml-3 sm:w-auto">Reject</button>
-                                            <button type="submit" name="approve" id="approve" class="inline-flex w-full justify-center rounded-md bg-green-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-pink-300 hover:text-black sm:ml-3 sm:w-auto">Approve</button> 
-                                        </div> 
-                                              
+                                          <?php
+                                            if ($row["approval"] == 0) {
+                                                echo '<div class="px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6"><br>';
+                                                echo '<button type="submit" name="reject" id="reject" class="inline-flex w-full justify-center rounded-md bg-red-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-pink-300 hover:text-black sm:ml-3 sm:w-auto">Reject</button>';
+                                                echo '<button type="submit" name="approve" id="approve" class="open-modal-btn inline-flex w-full justify-center rounded-md bg-green-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-pink-300 hover:text-black sm:ml-3 sm:w-auto">Approve</button>';
+                                                echo '</div>';
+                                            }
+                                            else{
+                                                echo "Approved";
+                                            }
+                                          ?>                                                                         
                                           </td>
                                       </tr>
-                                     <!-- The Modal -->
+                                        <!-- The Modal -->
                                         <div id="myModal" class="modal relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
                                             <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
                                             <div class="fixed inset-0 z-10 overflow-y-auto">
@@ -246,22 +251,25 @@
                                                     <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
                                                         <div class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
                                                             <div class="sm:flex sm:items-start">
-                                                                <div class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-500 sm:mx-0 sm:h-10 sm:w-10">
+                                                                <div class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-blue-500 sm:mx-0 sm:h-10 sm:w-10">
                                                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-10 h-10 text-white">
                                                                         <path d="M12 8v4M12 16h.01" />
                                                                     </svg>
                                                                 </div>
                                                                 <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
-                                                                    <h3 class="text-2xl leading-6 text-gray-900" id="modal-title">Reject <strong><?php echo $row["fName"]. ' ' . $row["lName"] ?></strong>?</h3>
+                                                                    <h3 class="text-2xl leading-6 text-gray-900" id="modal-title">Approve <strong><?php echo $row["fName"]. ' ' . $row["lName"] ?></strong>?</h3>
                                                                     <div class="mt-2 gap-3">
-                                                                        <p class="text-sm text-gray-500">This action cannot be undone.</p>
                                                                         <br>
-                                                                        <form action="crud.php" method="GET">
-                                                                            <div class="px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                                                                                <button id="rejectButton" name="reject" type="submit" class="inline-flex w-full justify-center rounded-md bg-red-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-yellow-100 hover:text-black sm:ml-3 sm:w-auto">Confirm</button>
-                                                                                <button type="button"  class="close mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto">Cancel</button>
-                                                                            </div>
-                                                                        </form>
+                                                                        <form action="approve.php" method="GET">
+                                                                        <!-- Add the hidden input field to pass the requestReserveId value -->
+                                                                        UserID: <input name="userID" value="<?php echo $row['userID']; ?>"><br  >
+                                                                        GravesiteID: <input name="gravesiteID" value="<?php echo $row['gravesiteID']; ?>">
+                                                                        <div class="px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                                                                            <button id="approveButton" name="approveButton" type="submit" class="inline-flex w-full justify-center rounded-md bg-blue-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-yellow-100 hover:text-black sm:ml-3 sm:w-auto">Confirm</button>
+                                                                            <button type="button" class="close mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto">Cancel</button>
+                                                                        </div>
+                                                                    </form>
+
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -271,23 +279,7 @@
                                             </div>
                                         </div>
                                         <!-- End of Modal -->
-                                        <script>
-                                        document.getElementById('rejectButton').addEventListener('click', function() {
-                                            var requestReserveID = <?php echo $row['userID']; ?>; // Retrieve the requestReserveID from PHP variable
-
-                                            // Send an AJAX request to crud.php
-                                            var xhr = new XMLHttpRequest();
-                                            xhr.open('GET', 'crud.php', true);
-                                            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                                            xhr.onreadystatechange = function() {
-                                            if (xhr.readyState === 4 && xhr.status === 200) {
-                                                // Handle the response from crud.php
-                                                console.log(xhr.responseText); // You can modify this to show a success message or perform other actions
-                                            }
-                                            };
-                                            xhr.send('userID=' + requestReserveID);
-                                        });
-                                        </script>
+        
                                       <?php                                    
                                   }
                               }
