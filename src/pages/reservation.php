@@ -1,9 +1,10 @@
 <?php
   include("database.php");
-  $sql = "SELECT user.userID, user.lName, user.fName, user.userEmail, gravesiteclassification.graveClassification, gravesite.graveCoordinates, gravesite.availability
-  FROM user 
-  INNER JOIN gravesite ON user.userID = gravesite.userID
-  INNER JOIN gravesiteclassification ON gravesiteclassification.graveClassID = gravesite.graveClassID";
+  $sql = "SELECT rr.userID, u.fName, u.lName, u.userEmail, gs.graveClassID, gc.graveClassification, gs.graveCoordinates, gs.availability
+  FROM requestreservation rr
+  INNER JOIN user u ON rr.userID = u.userID
+  INNER JOIN gravesite gs ON rr.gravesiteID = gs.graveClassID
+  INNER JOIN gravesiteclassification gc ON gs.graveClassID = gc.graveClassID";
   $result = mysqli_query($conn, $sql);
 
   include("crud.php");
@@ -210,13 +211,13 @@
                                       $split = explode(',', $graveCoordinates);
                                       $block = trim($split[0]);
                                       $lot = trim($split[1]);
-                                      if ($row["availability"] == "R"){
-                                        ?>
+                                     
+                                    ?>
                                       <tr>
                                         <td>
                                             <?php 
                                                 echo "ID: " . $row["userID"]."<br>";
-                                                echo "Name: " . $row["fName"].$row["lName"]."<br>";
+                                                echo "Name: " . $row["fName"]. " ".$row["lName"]."<br>";
                                                 echo "Email: " . $row["userEmail"]."<br>";
                                             ?>
                                         </td>
@@ -240,7 +241,7 @@
                                           </td>
                                       </tr>
                                       <?php
-                                      }
+                                      
                                       
                                   }
                               }
