@@ -6,7 +6,7 @@
   INNER JOIN gravesite gs ON rr.gravesiteID = gs.graveClassID
   INNER JOIN gravesiteclassification gc ON gs.graveClassID = gc.graveClassID";
   $result = mysqli_query($conn, $sql);
-
+  $fullName = "";
   include("crud.php");
 ?>
 <!DOCTYPE html>
@@ -232,17 +232,63 @@
                                           <td>
                                               
                                           <div class="px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6"><br>
-                                            <button type="submit" name="reject" id="reject" class="inline-flex w-full justify-center rounded-md bg-red-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-pink-300 hover:text-black sm:ml-3 sm:w-auto">Reject</button>
-                                            <button type="submit" name="approve" id="approve" class="inline-flex w-full justify-center rounded-md bg-green-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-pink-300 hover:text-black sm:ml-3 sm:w-auto">Approve</button>
-                                            <button type="submit" name="email" id="email" class="inline-flex w-full justify-center rounded-md bg-blue-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-pink-300 hover:text-black sm:ml-3 sm:w-auto">Email</button>
- 
+                                            <button type="submit" name="reject" id="reject" class="open-modal-btn inline-flex w-full justify-center rounded-md bg-red-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-pink-300 hover:text-black sm:ml-3 sm:w-auto">Reject</button>
+                                            <button type="submit" name="approve" id="approve" class="inline-flex w-full justify-center rounded-md bg-green-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-pink-300 hover:text-black sm:ml-3 sm:w-auto">Approve</button> 
                                         </div> 
                                               
                                           </td>
                                       </tr>
-                                      <?php
-                                      
-                                      
+                                     <!-- The Modal -->
+                                        <div id="myModal" class="modal relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+                                            <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+                                            <div class="fixed inset-0 z-10 overflow-y-auto">
+                                                <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                                                    <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+                                                        <div class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+                                                            <div class="sm:flex sm:items-start">
+                                                                <div class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-500 sm:mx-0 sm:h-10 sm:w-10">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-10 h-10 text-white">
+                                                                        <path d="M12 8v4M12 16h.01" />
+                                                                    </svg>
+                                                                </div>
+                                                                <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
+                                                                    <h3 class="text-2xl leading-6 text-gray-900" id="modal-title">Reject <strong><?php echo $row["fName"]. ' ' . $row["lName"] ?></strong>?</h3>
+                                                                    <div class="mt-2 gap-3">
+                                                                        <p class="text-sm text-gray-500">This action cannot be undone.</p>
+                                                                        <br>
+                                                                        <form action="crud.php" method="GET">
+                                                                            <div class="px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                                                                                <button id="rejectButton" name="reject" type="submit" class="inline-flex w-full justify-center rounded-md bg-red-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-yellow-100 hover:text-black sm:ml-3 sm:w-auto">Confirm</button>
+                                                                                <button type="button"  class="close mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto">Cancel</button>
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- End of Modal -->
+                                        <script>
+                                        document.getElementById('rejectButton').addEventListener('click', function() {
+                                            var requestReserveID = <?php echo $row['userID']; ?>; // Retrieve the requestReserveID from PHP variable
+
+                                            // Send an AJAX request to crud.php
+                                            var xhr = new XMLHttpRequest();
+                                            xhr.open('GET', 'crud.php', true);
+                                            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                                            xhr.onreadystatechange = function() {
+                                            if (xhr.readyState === 4 && xhr.status === 200) {
+                                                // Handle the response from crud.php
+                                                console.log(xhr.responseText); // You can modify this to show a success message or perform other actions
+                                            }
+                                            };
+                                            xhr.send('userID=' + requestReserveID);
+                                        });
+                                        </script>
+                                      <?php                                    
                                   }
                               }
                               ?>
@@ -250,6 +296,7 @@
                 </div>
                 <!--/Card-->
             </div>
+             
         </div>
     </div>
     <!-- end of main div -->
@@ -268,6 +315,45 @@
                 .responsive.recalc();
         });
     </script>
+    <script>
+      // Open modal on button click
+      $('.open-modal-btn').click(function () {
+              // Get the row data
+              var row = $(this).closest('tr');
+              var deceasedID = row.find('td:eq(0)').text().trim();
+              var nameOfDeceased = row.find('td:eq(1)').text().trim();
+              var dateOfBirth = row.find('td:eq(2)').text().trim();
+              var dateOfDeath = row.find('td:eq(3)').text().trim();
+              var block = row.find('td:eq(4)').text().trim();
+              var lot = row.find('td:eq(5)').text().trim();
+              var gravesiteClassification = row.find('td:eq(6)').text().trim();
+
+              // Set the form values
+              $('#deceasedID').val(deceasedID);
+              $('#nameOfDeceased').val(nameOfDeceased);
+              $('#dateOfBirth').val(dateOfBirth);
+              $('#dateOfDeath').val(dateOfDeath);
+              $('#block').val(block);
+              $('#lot').val(lot);
+              $('#gravesiteClassification').val(gravesiteClassification);
+
+              // Show the modal
+              $('#myModal').css('display', 'block');
+          });
+
+          // Close modal on close button click
+          $('.close').click(function () {
+              $('#myModal').css('display', 'none');
+          });
+
+          // Close modal when clicking outside the modal
+          $(window).click(function (event) {
+              if (event.target == $('#myModal')[0]) {
+                  $('#myModal').css('display', 'none');
+              }
+          }); 
+      </script> 
+      
     <script src="../javascript//user-menu.js"></script>
 </body>
 </html>
